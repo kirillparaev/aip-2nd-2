@@ -70,12 +70,10 @@ void processVolumes(){  //всё, что связано с вычисления�
 void outputHandling(){  //всё, что связано с выводом результатов
     int output_choice = 0;
     std::cout << " " << std::endl;
-
     std::cout << "Choose an output method: " << std::endl;
     std::cout << "1) In console" << std::endl;
     std::cout << "2) In a *.txt file" << std::endl;
     std::cout << "Your choice: ";
-
     std::cin >> output_choice;
 
     switch (output_choice){

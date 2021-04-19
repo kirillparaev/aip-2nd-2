@@ -1,2 +1,2 @@
-Square of your number: 25
-Cube of your number: 125
+Square of your number: 49
+Cube of your number: 343

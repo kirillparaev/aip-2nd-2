@@ -1,11 +1,12 @@
 #include <iostream>
 #include <fstream>
 
-
 float price_of_sweets;
 float price_of_cookies;
 float purchase1();
 float purchase2();
+void consoleOutput();
+void fileOutput();
 
 int main()
 {
@@ -24,38 +25,13 @@ int main()
         break;
 
     case 1:
-        std::cout << "                               " << std::endl;
-        std::cout << "Price for 1kg of sweets: ";
-        std::cin >> price_of_sweets;
-
-        std::cout << "Price for 1kg of cookies: ";
-        std::cin >> price_of_cookies;
-
-        std::cout << "                              " << std::endl;
-        std::cout << "Cost of 300g of sweets + 400g of cookies: " << purchase1() << std::endl;
-
-        std::cout << "Cost of 3 purchases of 2kg of cookies + 1,8 kg of sweets: " << purchase2() << std::endl;
+        consoleOutput();
         getchar();
         getchar();
     break;
 
     case 2:
-        std::ofstream outFile;
-        outFile.open("prices.txt");
-
-        std::cout << "                               " << std::endl;
-        std::cout << "Price for 1kg of sweets: ";
-        std::cin >> price_of_sweets;
-
-        std::cout << "Price for 1kg of cookies: ";
-        std::cin >> price_of_cookies;
-
-        outFile << "Cost of 300g of sweets + 400g of cookies: " << purchase1() << std::endl;
-        outFile << "Cost of 3 purchases of 2kg of cookies + 1,8 kg of sweets: " << purchase2() << std::endl;
-
-        std::cout << "                               " << std::endl;
-        std::cout << "Check prices.txt file in program's directory" << std::endl;
-        outFile.close();
+        fileOutput();
         break;
     }
 
@@ -74,4 +50,37 @@ float purchase2(){
     float cost2;
     cost2 = 3 * ( (2 * price_of_cookies) + (1.8 * price_of_sweets) );
     return(cost2);
+}
+
+void consoleOutput(){
+    std::cout << "                               " << std::endl;
+    std::cout << "Price for 1kg of sweets: ";
+    std::cin >> price_of_sweets;
+
+    std::cout << "Price for 1kg of cookies: ";
+    std::cin >> price_of_cookies;
+
+    std::cout << "                              " << std::endl;
+    std::cout << "Cost of 300g of sweets + 400g of cookies: " << purchase1() << std::endl;
+
+    std::cout << "Cost of 3 purchases of 2kg of cookies + 1,8 kg of sweets: " << purchase2() << std::endl;
+}
+
+void fileOutput(){
+    std::ofstream outFile;
+    outFile.open("prices.txt");
+
+    std::cout << "                               " << std::endl;
+    std::cout << "Price for 1kg of sweets: ";
+    std::cin >> price_of_sweets;
+
+    std::cout << "Price for 1kg of cookies: ";
+    std::cin >> price_of_cookies;
+
+    outFile << "Cost of 300g of sweets + 400g of cookies: " << purchase1() << std::endl;
+    outFile << "Cost of 3 purchases of 2kg of cookies + 1,8 kg of sweets: " << purchase2() << std::endl;
+
+    std::cout << "                               " << std::endl;
+    std::cout << "Check prices.txt file in program's directory" << std::endl;
+    outFile.close();
 }
