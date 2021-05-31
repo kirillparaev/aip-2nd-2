@@ -1,9 +1,10 @@
 ﻿#include <iostream>
 #include <locale.h>
+#include <vector>
 
 //10. Реализовать сложение, вычитание, умножение, транспонирование матриц (разрешается фиксированный размер матриц).
 //11.2 - матричная норма Lбесконечность - норма
-//11.5 - матричная норма
+//11.5 - матричная норма #5
 
 const int rows = 3;
 const int cols = 3;
@@ -12,6 +13,10 @@ int matrix1[rows][cols];
 int matrix2[rows][cols];
 int matrixResult[rows][cols];
 int choice = 0;
+int maxColSum = -2147483648;
+int currentColSum = 0;
+int sumOfAllCols = 0;
+std::vector <int> sumOfCol;
 
 void matrixesInit();
 void matrixAdd();
@@ -22,6 +27,8 @@ int userChoice();
 void matrixOnNumberMult();
 void matrixOnMatrixMult();
 void matrixTransponing();
+void matrixNormInf();
+void matrixNorm5();
 
 int main()
 {
@@ -38,11 +45,13 @@ int userChoice() {
     std::cout << "4) Перемножить матрицы" << std::endl;
     std::cout << "5) Транспонировать матрицу" << std::endl;
     std::cout << "6) Просмотреть матрицы" << std::endl;
-    std::cout << "7) Выйти" << std::endl;
+    std::cout << "7) Матричная норма - сумма сумм всех столбцов матрицы" << std::endl;
+    std::cout << "8) Матричная норма - бесконечность" << std::endl;
+    std::cout << "9) Выйти" << std::endl;
     std::cout << "Выбор: ";
     std::cin >> choice;
 
-    if (choice != 6 && choice != 7) {
+    if (choice != 6 && choice != 9) {
         matrixesInit();
     }
 
@@ -68,6 +77,12 @@ int userChoice() {
         userChoice();
         break;
     case 7:
+        matrixNorm5();
+        break;
+    case 8:
+        matrixNormInf();
+        break;
+    case 9:
         return(0);
         break;
     default:
@@ -76,6 +91,42 @@ int userChoice() {
         userChoice();
     }
     return(0);
+}
+
+void matrixNorm5() {
+    std::cout << " " << std::endl;
+    for (int j = 0; j < cols; j++) {
+        for (int i = 0; i < rows; i++) {
+            currentColSum = currentColSum + matrix1[i][j];
+        }
+    }
+    std::cout << std::endl;
+    std::cout << "Норма - сумма всех сумм элементов столбцов: " << currentColSum << std::endl;
+    std::cout << std::endl;
+    userChoice();
+}
+
+void matrixNormInf() {
+    std::cout << " " << std::endl;
+
+    for (int j = 0; j < cols; j++) {
+        int currentSum = 0;
+        for (int i = 0; i < rows; i++) {
+            currentSum = currentSum + matrix1[i][j];
+        }
+        sumOfCol.push_back(currentSum);
+    }
+
+    for (int i = 0; i < sumOfCol.size(); i++) {
+        if (sumOfCol[i] > maxColSum) {
+            maxColSum = sumOfCol[i];
+        }
+    }
+
+    std::cout << std::endl;
+    std::cout << "Норма - бесконечность: " << maxColSum << std::endl;
+    std::cout << std::endl;
+    userChoice();
 }
 
 void matrixesInit() {
