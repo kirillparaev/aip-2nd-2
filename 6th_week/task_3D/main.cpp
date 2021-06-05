@@ -3,18 +3,21 @@
 
 using namespace std;
 
+struct Point {
+    float x, y;
+};
+
 int main()
 {
-    float x,y;
     cout << "Enter x coordinate: ";
-    cin >> x;
+    cin >> Point.x;
     cout << "Enter y coordinate: ";
-    cin >> y;
+    cin >> Point.y;
 
-    if ((x*x+y*y) < 1.0000001) {
-        if (x < y && x > 0) {
+    if ((Point.x * Point.x + Point.y * Point.y) < 1.0000001) {
+        if (Point.x < Point.y && Point.x > 0) {
             cout << "Belongs to" << endl;
-        } else if (x < 0 && fabs(x) < y) {
+        } else if (Point.x < 0 && fabs(Point.x) < Point.y) {
             cout << "Belongs to" << endl;
         } else {
             cout << "Not belongs to" << endl;
